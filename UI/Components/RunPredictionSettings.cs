@@ -109,6 +109,7 @@ namespace LiveSplit.UI.Components
             else
             {
                 chkTwoRows.Enabled = true;
+                chkTwoRows.DataBindings.Clear();
                 chkTwoRows.DataBindings.Add("Checked", this, "Display2Rows", false, DataSourceUpdateMode.OnPropertyChanged);
             }
         }

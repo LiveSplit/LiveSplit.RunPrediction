@@ -17,7 +17,7 @@ namespace LiveSplit.UI.Components
 
         public string Description
         {
-            get { return ""; }
+            get { return "Displays what the final run time would be if the run continues at the same pace as a set comparison."; }
         }
 
         public ComponentCategory Category
