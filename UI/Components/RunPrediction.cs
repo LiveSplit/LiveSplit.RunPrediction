@@ -38,7 +38,14 @@ namespace LiveSplit.UI.Components
                 CurrentState = state
             };
             Formatter = new RunPredictionFormatter(Settings.Accuracy);
-            InternalComponent = new InfoTimeComponent(null, null, Formatter);
+            InternalComponent = new InfoTimeComponent(null, null, Formatter)
+            {
+                AlternateNameText = new String[]
+                {
+                    "Predicted Time",
+                    "Pred. Time"
+                }
+            };
             Cache = new GraphicsCache();
         }
 
@@ -174,6 +181,10 @@ namespace LiveSplit.UI.Components
             {
                 invalidator.Invalidate(0, 0, width, height);
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
