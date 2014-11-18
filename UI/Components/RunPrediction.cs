@@ -54,7 +54,10 @@ namespace LiveSplit.UI.Components
         {
             var args = (RenameEventArgs)e;
             if (Settings.Comparison == args.OldName)
+            {
                 Settings.Comparison = args.NewName;
+                ((LiveSplitState)sender).Layout.HasChanged = true;
+            }
         }
 
         private void PrepareDraw(LiveSplitState state)
