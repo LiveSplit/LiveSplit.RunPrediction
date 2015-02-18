@@ -19,8 +19,6 @@ namespace LiveSplit.UI.Components
         public RunPredictionSettings Settings { get; set; }
         private RunPredictionFormatter Formatter { get; set; }
 
-        public GraphicsCache Cache { get; set; }
-
         public float PaddingTop { get { return InternalComponent.PaddingTop; } }
         public float PaddingLeft { get { return InternalComponent.PaddingLeft; } }
         public float PaddingBottom { get { return InternalComponent.PaddingBottom; } }
@@ -46,7 +44,6 @@ namespace LiveSplit.UI.Components
                     "Pred. Time"
                 }
             };
-            Cache = new GraphicsCache();
             state.ComparisonRenamed += state_ComparisonRenamed;
         }
 
@@ -156,7 +153,7 @@ namespace LiveSplit.UI.Components
             var comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
             var componentName = "Predicted Time" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
             InternalComponent.LongestString = componentName;
-            InternalComponent.NameLabel.Text = componentName;
+            InternalComponent.InformationName = componentName;
 
 
             if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
@@ -176,14 +173,7 @@ namespace LiveSplit.UI.Components
                 InternalComponent.TimeValue = state.Run.Last().Comparisons[comparison][state.CurrentTimingMethod];
             }
 
-            Cache.Restart();
-            Cache["NameValue"] = InternalComponent.NameLabel.Text;
-            Cache["TimeValue"] = InternalComponent.ValueLabel.Text;
-
-            if (invalidator != null && Cache.HasChanged)
-            {
-                invalidator.Invalidate(0, 0, width, height);
-            }
+            InternalComponent.Update(invalidator, state, width, height, mode);
         }
 
         public void Dispose()
