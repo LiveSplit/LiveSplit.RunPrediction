@@ -142,61 +142,36 @@ namespace LiveSplit.UI.Components
                 Accuracy = TimeAccuracy.Hundredths;
         }
 
-        private T ParseEnum<T>(XmlElement element)
-        {
-            return (T)Enum.Parse(typeof(T), element.InnerText);
-        }
-
         public void SetSettings(XmlNode node)
         {
             var element = (XmlElement)node;
-            Version version;
-            if (element["Version"] != null)
-                version = Version.Parse(element["Version"].InnerText);
-            else
-                version = new Version(1, 0, 0, 0);
-            TextColor = ParseColor(element["TextColor"]);
-            OverrideTextColor = Boolean.Parse(element["OverrideTextColor"].InnerText);
-            TimeColor = ParseColor(element["TimeColor"]);
-            OverrideTimeColor = Boolean.Parse(element["OverrideTimeColor"].InnerText);
-            Accuracy = ParseEnum<TimeAccuracy>(element["Accuracy"]);
-            BackgroundColor = ParseColor(element["BackgroundColor"]);
-            BackgroundColor2 = ParseColor(element["BackgroundColor2"]);
-            GradientString = element["BackgroundGradient"].InnerText;
-            Comparison = element["Comparison"].InnerText;
-            if (version >= new Version(1, 4))
-                Display2Rows = Boolean.Parse(element["Display2Rows"].InnerText);
-            else
-                Display2Rows = false;
+            TextColor = SettingsHelper.ParseColor(element["TextColor"]);
+            OverrideTextColor = SettingsHelper.ParseBool(element["OverrideTextColor"]);
+            TimeColor = SettingsHelper.ParseColor(element["TimeColor"]);
+            OverrideTimeColor = SettingsHelper.ParseBool(element["OverrideTimeColor"]);
+            Accuracy = SettingsHelper.ParseEnum<TimeAccuracy>(element["Accuracy"]);
+            BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"]);
+            BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"]);
+            GradientString = SettingsHelper.ParseString(element["BackgroundGradient"]);
+            Comparison = SettingsHelper.ParseString(element["Comparison"]);
+            Display2Rows = SettingsHelper.ParseBool(element["Display2Rows"], false);
         }
 
         public XmlNode GetSettings(XmlDocument document)
         {
             var parent = document.CreateElement("Settings");
-            parent.AppendChild(ToElement(document, "Version", "1.4"));
-            parent.AppendChild(ToElement(document, TextColor, "TextColor"));
-            parent.AppendChild(ToElement(document, "OverrideTextColor", OverrideTextColor));
-            parent.AppendChild(ToElement(document, TimeColor, "TimeColor"));
-            parent.AppendChild(ToElement(document, "OverrideTimeColor", OverrideTimeColor));
-            parent.AppendChild(ToElement(document, "Accuracy", Accuracy));
-            parent.AppendChild(ToElement(document, BackgroundColor, "BackgroundColor"));
-            parent.AppendChild(ToElement(document, BackgroundColor2, "BackgroundColor2"));
-            parent.AppendChild(ToElement(document, "BackgroundGradient", BackgroundGradient));
-            parent.AppendChild(ToElement(document, "Comparison", Comparison));
-            parent.AppendChild(ToElement(document, "Display2Rows", Display2Rows));
+            parent.AppendChild(SettingsHelper.ToElement(document, "Version", "1.4"));
+            parent.AppendChild(SettingsHelper.ToElement(document, TextColor, "TextColor"));
+            parent.AppendChild(SettingsHelper.ToElement(document, "OverrideTextColor", OverrideTextColor));
+            parent.AppendChild(SettingsHelper.ToElement(document, TimeColor, "TimeColor"));
+            parent.AppendChild(SettingsHelper.ToElement(document, "OverrideTimeColor", OverrideTimeColor));
+            parent.AppendChild(SettingsHelper.ToElement(document, "Accuracy", Accuracy));
+            parent.AppendChild(SettingsHelper.ToElement(document, BackgroundColor, "BackgroundColor"));
+            parent.AppendChild(SettingsHelper.ToElement(document, BackgroundColor2, "BackgroundColor2"));
+            parent.AppendChild(SettingsHelper.ToElement(document, "BackgroundGradient", BackgroundGradient));
+            parent.AppendChild(SettingsHelper.ToElement(document, "Comparison", Comparison));
+            parent.AppendChild(SettingsHelper.ToElement(document, "Display2Rows", Display2Rows));
             return parent;
-        }
-
-        private Color ParseColor(XmlElement colorElement)
-        {
-            return Color.FromArgb(Int32.Parse(colorElement.InnerText, NumberStyles.HexNumber));
-        }
-
-        private XmlElement ToElement(XmlDocument document, Color color, string name)
-        {
-            var element = document.CreateElement(name);
-            element.InnerText = color.ToArgb().ToString("X8");
-            return element;
         }
 
         private void ColorButtonClick(object sender, EventArgs e)
@@ -207,13 +182,6 @@ namespace LiveSplit.UI.Components
             picker.SelectedColor = picker.OldColor = button.BackColor;
             picker.ShowDialog(this);
             button.BackColor = picker.SelectedColor;
-        }
-
-        private XmlElement ToElement<T>(XmlDocument document, String name, T value)
-        {
-            var element = document.CreateElement(name);
-            element.InnerText = value.ToString();
-            return element;
         }
     }
 }
