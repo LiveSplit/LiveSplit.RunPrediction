@@ -65,7 +65,6 @@ namespace LiveSplit.UI.Components
             btnColor2.DataBindings.Add("BackColor", this, "BackgroundColor2", false, DataSourceUpdateMode.OnPropertyChanged);
             cmbComparison.SelectedIndexChanged += cmbComparison_SelectedIndexChanged;
             cmbComparison.DataBindings.Add("SelectedItem", this, "Comparison", false, DataSourceUpdateMode.OnPropertyChanged);
-            this.Load += PossibleTimeSaveSettings_Load;
 
             rdoSeconds.CheckedChanged += rdoSeconds_CheckedChanged;
             rdoHundredths.CheckedChanged += rdoHundredths_CheckedChanged;
@@ -88,7 +87,7 @@ namespace LiveSplit.UI.Components
             Comparison = cmbComparison.SelectedItem.ToString();
         }
 
-        void PossibleTimeSaveSettings_Load(object sender, EventArgs e)
+        void RunPredictionSettings_Load(object sender, EventArgs e)
         {
             chkOverrideTextColor_CheckedChanged(null, null);
             chkOverrideTimeColor_CheckedChanged(null, null);

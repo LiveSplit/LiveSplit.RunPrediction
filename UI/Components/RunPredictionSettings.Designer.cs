@@ -407,6 +407,7 @@
             this.Name = "RunPredictionSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
             this.Size = new System.Drawing.Size(476, 341);
+            this.Load += new System.EventHandler(RunPredictionSettings_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
