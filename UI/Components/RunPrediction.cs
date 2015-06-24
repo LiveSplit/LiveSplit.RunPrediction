@@ -126,7 +126,7 @@ namespace LiveSplit.UI.Components
 
         public string ComponentName
         {
-            get { return "Run Prediction" + (Settings.Comparison == "Current Comparison" ? "" : " (" + CompositeComparisons.GetShortComparisonName(Settings.Comparison) + ")"); }
+            get { return GetDisplayedName(Settings.Comparison); }
         }
 
         public Control GetSettingsControl(LayoutMode mode)
@@ -145,16 +145,32 @@ namespace LiveSplit.UI.Components
             return Settings.GetSettings(document);
         }
 
+        protected string GetDisplayedName(string comparison)
+        {
+            switch(comparison)
+            {
+                case "Current Comparison":
+                    return "Current Pace";
+                case Run.PersonalBestComparisonName:
+                    return "Current Pace";
+                case BestSegmentsComparisonGenerator.ComparisonName:
+                    return "Best Possible Time";
+                case WorstSegmentsComparisonGenerator.ComparisonName:
+                    return "Worst Possible Time";
+                case AverageSegmentsComparisonGenerator.ComparisonName:
+                    return "Predicted Time";
+                default:
+                    return "Current Pace (" + CompositeComparisons.GetShortComparisonName(comparison) + ")";
+            }
+        }
+
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
             if (!state.Run.Comparisons.Contains(comparison))
                 comparison = state.CurrentComparison;
-            var comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
-            var componentName = "Predicted Time" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
-            InternalComponent.LongestString = componentName;
-            InternalComponent.InformationName = componentName;
 
+            InternalComponent.InformationName = InternalComponent.LongestString = GetDisplayedName(comparison);
 
             if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
             {
