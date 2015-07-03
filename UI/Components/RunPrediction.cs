@@ -163,41 +163,41 @@ namespace LiveSplit.UI.Components
             switch (comparison)
             {
                 case "Current Comparison":
-                    InternalComponent.AlternateNameText = new String[]
+                    InternalComponent.AlternateNameText = new []
                     {
                         "Cur. Pace",
                         "Pace"
                     };
                     break;
                 case Run.PersonalBestComparisonName:
-                    InternalComponent.AlternateNameText = new String[]
+                    InternalComponent.AlternateNameText = new []
                     {
                         "Cur. Pace",
                         "Pace"
                     };
                     break;
                 case BestSegmentsComparisonGenerator.ComparisonName:
-                    InternalComponent.AlternateNameText = new String[]
+                    InternalComponent.AlternateNameText = new []
                     {
                         "Best Poss. Time",
                         "Best Time"
                     };
                     break;
                 case WorstSegmentsComparisonGenerator.ComparisonName:
-                    InternalComponent.AlternateNameText = new String[]
+                    InternalComponent.AlternateNameText = new []
                     {
                         "Worst Poss. Time",
                         "Worst Time"
                     };
                     break;
                 case AverageSegmentsComparisonGenerator.ComparisonName:
-                    InternalComponent.AlternateNameText = new String[]
+                    InternalComponent.AlternateNameText = new []
                     {
                         "Pred. Time",
                     };
                     break;
                 default:
-                    InternalComponent.AlternateNameText = new String[]
+                    InternalComponent.AlternateNameText = new []
                     {
                         "Current Pace",
                         "Cur. Pace",
