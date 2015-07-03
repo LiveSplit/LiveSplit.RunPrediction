@@ -18,6 +18,7 @@ namespace LiveSplit.UI.Components
         protected InfoTimeComponent InternalComponent { get; set; }
         public RunPredictionSettings Settings { get; set; }
         private RunPredictionFormatter Formatter { get; set; }
+        private string PreviousInformationName { get; set; }
 
         public float PaddingTop { get { return InternalComponent.PaddingTop; } }
         public float PaddingLeft { get { return InternalComponent.PaddingLeft; } }
@@ -36,14 +37,7 @@ namespace LiveSplit.UI.Components
                 CurrentState = state
             };
             Formatter = new RunPredictionFormatter(Settings.Accuracy);
-            InternalComponent = new InfoTimeComponent(null, null, Formatter)
-            {
-                AlternateNameText = new String[]
-                {
-                    "Predicted Time",
-                    "Pred. Time"
-                }
-            };
+            InternalComponent = new InfoTimeComponent(null, null, Formatter);
             state.ComparisonRenamed += state_ComparisonRenamed;
         }
 
@@ -164,6 +158,52 @@ namespace LiveSplit.UI.Components
             }
         }
 
+        protected void SetAlternateText(string comparison)
+        {
+            switch (comparison)
+            {
+                case "Current Comparison":
+                    InternalComponent.AlternateNameText = new String[]
+                    {
+                        "Cur. Pace",
+                    };
+                    break;
+                case Run.PersonalBestComparisonName:
+                    InternalComponent.AlternateNameText = new String[]
+                    {
+                        "Cur. Pace",
+                    };
+                    break;
+                case BestSegmentsComparisonGenerator.ComparisonName:
+                    InternalComponent.AlternateNameText = new String[]
+                    {
+                        "Best Poss. Time",
+                        "Best Time"
+                    };
+                    break;
+                case WorstSegmentsComparisonGenerator.ComparisonName:
+                    InternalComponent.AlternateNameText = new String[]
+                    {
+                        "Worst Poss. Time",
+                        "Worst Time"
+                    };
+                    break;
+                case AverageSegmentsComparisonGenerator.ComparisonName:
+                    InternalComponent.AlternateNameText = new String[]
+                    {
+                        "Pred. Time",
+                    };
+                    break;
+                default:
+                    InternalComponent.AlternateNameText = new String[]
+                    {
+                        "Current Pace",
+                        "Cur. Pace"
+                    };
+                    break;
+            }
+        }
+
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
@@ -172,7 +212,17 @@ namespace LiveSplit.UI.Components
 
             InternalComponent.InformationName = InternalComponent.LongestString = GetDisplayedName(comparison);
 
-            if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
+            if (InternalComponent.InformationName != PreviousInformationName)
+            {
+                SetAlternateText(comparison);
+                PreviousInformationName = InternalComponent.InformationName;
+            }
+
+            if (InternalComponent.InformationName.StartsWith("Current Pace") && state.CurrentPhase == TimerPhase.NotRunning)
+            {
+                InternalComponent.TimeValue = null;
+            }
+            else if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
             {
                 TimeSpan? delta = LiveSplitStateHelper.GetLastDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod) ?? TimeSpan.Zero;
                 var liveDelta = state.CurrentTime[state.CurrentTimingMethod] - state.CurrentSplit.Comparisons[comparison][state.CurrentTimingMethod];
