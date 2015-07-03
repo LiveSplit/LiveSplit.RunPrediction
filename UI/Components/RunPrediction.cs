@@ -166,12 +166,14 @@ namespace LiveSplit.UI.Components
                     InternalComponent.AlternateNameText = new String[]
                     {
                         "Cur. Pace",
+                        "Pace"
                     };
                     break;
                 case Run.PersonalBestComparisonName:
                     InternalComponent.AlternateNameText = new String[]
                     {
                         "Cur. Pace",
+                        "Pace"
                     };
                     break;
                 case BestSegmentsComparisonGenerator.ComparisonName:
@@ -198,7 +200,8 @@ namespace LiveSplit.UI.Components
                     InternalComponent.AlternateNameText = new String[]
                     {
                         "Current Pace",
-                        "Cur. Pace"
+                        "Cur. Pace",
+                        "Pace"
                     };
                     break;
             }
