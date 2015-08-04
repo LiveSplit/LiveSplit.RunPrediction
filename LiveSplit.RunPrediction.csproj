@@ -68,6 +68,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\Components\RunPredictionSettings.ja-JP.resx">
+      <DependentUpon>RunPredictionSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\RunPredictionSettings.resx">
       <DependentUpon>RunPredictionSettings.cs</DependentUpon>
     </EmbeddedResource>
