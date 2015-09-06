@@ -20,13 +20,13 @@ namespace LiveSplit.UI.Components
         public Color BackgroundColor { get; set; }
         public Color BackgroundColor2 { get; set; }
         public GradientType BackgroundGradient { get; set; }
-        public String GradientString
+        public string GradientString
         {
             get { return BackgroundGradient.ToString(); }
             set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
         }
 
-        public String Comparison { get; set; }
+        public string Comparison { get; set; }
         public LiveSplitState CurrentState { get; set; }
         public bool Display2Rows { get; set; }
 

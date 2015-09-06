@@ -5,52 +5,20 @@ namespace LiveSplit.UI.Components
 {
     public class RunPredictionFactory : IComponentFactory
     {
-        public string ComponentName
-        {
-            get { return "Run Prediction"; }
-        }
+        public string ComponentName => "Run Prediction";
 
-        public string Description
-        {
-            get { return "Displays what the final run time would be if the run continues at the same pace as a set comparison."; }
-        }
+        public string Description => "Displays what the final run time would be if the run continues at the same pace as a set comparison.";
 
-        public ComponentCategory Category
-        {
-            get { return ComponentCategory.Information; }
-        }
+        public ComponentCategory Category => ComponentCategory.Information; 
 
-        public IComponent Create(LiveSplitState state)
-        {
-            return new RunPrediction(state);
-        }
+        public IComponent Create(LiveSplitState state) => new RunPrediction(state);
 
-        public string UpdateName
-        {
-            get { return ComponentName; }
-        }
+        public string UpdateName => ComponentName;
 
-        public string XMLURL
-        {
-#if RELEASE_CANDIDATE
-            get { return "http://livesplit.org/update_rc_sdhjdop/Components/update.LiveSplit.RunPrediction.xml"; }
-#else
-            get { return "http://livesplit.org/update/Components/update.LiveSplit.RunPrediction.xml"; }
-#endif
-        }
+        public string XMLURL => "http://livesplit.org/update/Components/update.LiveSplit.RunPrediction.xml";
 
-        public string UpdateURL
-        {
-#if RELEASE_CANDIDATE
-            get { return "http://livesplit.org/update_rc_sdhjdop/"; }
-#else
-            get { return "http://livesplit.org/update/"; }
-#endif
-        }
+        public string UpdateURL => "http://livesplit.org/update/";
 
-        public Version Version
-        {
-            get { return Version.Parse("1.6"); }
-        }
+        public Version Version => Version.Parse("1.6");
     }
 }

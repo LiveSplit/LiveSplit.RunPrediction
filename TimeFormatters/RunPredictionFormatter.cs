@@ -10,6 +10,7 @@ namespace LiveSplit.TimeFormatters
         {
             Accuracy = accuracy;
         }
+
         public string Format(TimeSpan? time)
         {
             var formatter = new RegularTimeFormatter(Accuracy);
