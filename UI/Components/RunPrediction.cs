@@ -159,7 +159,8 @@ namespace LiveSplit.UI.Components
                     InternalComponent.AlternateNameText = new []
                     {
                         "Best Poss. Time",
-                        "Best Time"
+                        "Best Time",
+                        "BPT"
                     };
                     break;
                 case WorstSegmentsComparisonGenerator.ComparisonName:
