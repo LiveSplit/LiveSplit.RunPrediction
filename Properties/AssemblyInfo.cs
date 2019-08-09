@@ -37,4 +37,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: ComponentFactory(typeof(RunPredictionFactory))]
-[assembly: InternalsVisibleTo("LiveSplit.UnitTests")]
