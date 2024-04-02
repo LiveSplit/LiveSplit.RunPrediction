@@ -1,5 +1,8 @@
 ﻿using LiveSplit.Model;
+using LiveSplit.UI.Components;
 using System;
+
+[assembly: ComponentFactory(typeof(RunPredictionFactory))]
 
 namespace LiveSplit.UI.Components
 {
@@ -9,7 +12,7 @@ namespace LiveSplit.UI.Components
 
         public string Description => "Displays what the final run time would be if the run continues at the same pace as a set comparison.";
 
-        public ComponentCategory Category => ComponentCategory.Information; 
+        public ComponentCategory Category => ComponentCategory.Information;
 
         public IComponent Create(LiveSplitState state) => new RunPrediction(state);
 
