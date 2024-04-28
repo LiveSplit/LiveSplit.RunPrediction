@@ -14,7 +14,7 @@ namespace LiveSplit.UI.Components
     {
         protected InfoTimeComponent InternalComponent { get; set; }
         public RunPredictionSettings Settings { get; set; }
-        private RunPredictionFormatter Formatter { get; set; }
+        private SplitTimeFormatter Formatter { get; set; }
         private string PreviousInformationName { get; set; }
 
         public float PaddingTop => InternalComponent.PaddingTop;
@@ -30,7 +30,7 @@ namespace LiveSplit.UI.Components
             {
                 CurrentState = state
             };
-            Formatter = new RunPredictionFormatter(Settings.Accuracy);
+            Formatter = new SplitTimeFormatter(Settings.Accuracy);
             InternalComponent = new InfoTimeComponent(null, null, Formatter);
             state.ComparisonRenamed += state_ComparisonRenamed;
         }
