@@ -53,6 +53,7 @@
             this.btnColor1 = new System.Windows.Forms.Button();
             this.btnColor2 = new System.Windows.Forms.Button();
             this.chkTwoRows = new System.Windows.Forms.CheckBox();
+            this.rdoMilliseconds = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -221,10 +222,12 @@
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 3;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.ColumnCount = 4;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel5.Controls.Add(this.rdoMilliseconds, 3, 0);
             this.tableLayoutPanel5.Controls.Add(this.rdoSeconds, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.rdoTenths, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.rdoHundredths, 2, 0);
@@ -242,7 +245,7 @@
             this.rdoSeconds.AutoSize = true;
             this.rdoSeconds.Location = new System.Drawing.Point(3, 3);
             this.rdoSeconds.Name = "rdoSeconds";
-            this.rdoSeconds.Size = new System.Drawing.Size(140, 17);
+            this.rdoSeconds.Size = new System.Drawing.Size(103, 17);
             this.rdoSeconds.TabIndex = 0;
             this.rdoSeconds.TabStop = true;
             this.rdoSeconds.Text = "Seconds";
@@ -252,21 +255,22 @@
             // 
             this.rdoTenths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoTenths.AutoSize = true;
-            this.rdoTenths.Location = new System.Drawing.Point(149, 3);
+            this.rdoTenths.Location = new System.Drawing.Point(112, 3);
             this.rdoTenths.Name = "rdoTenths";
-            this.rdoTenths.Size = new System.Drawing.Size(140, 17);
+            this.rdoTenths.Size = new System.Drawing.Size(103, 17);
             this.rdoTenths.TabIndex = 1;
             this.rdoTenths.TabStop = true;
             this.rdoTenths.Text = "Tenths";
             this.rdoTenths.UseVisualStyleBackColor = true;
+            this.rdoTenths.CheckedChanged += new System.EventHandler(this.rdoTenths_CheckedChanged);
             // 
             // rdoHundredths
             // 
             this.rdoHundredths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoHundredths.AutoSize = true;
-            this.rdoHundredths.Location = new System.Drawing.Point(295, 3);
+            this.rdoHundredths.Location = new System.Drawing.Point(221, 3);
             this.rdoHundredths.Name = "rdoHundredths";
-            this.rdoHundredths.Size = new System.Drawing.Size(140, 17);
+            this.rdoHundredths.Size = new System.Drawing.Size(103, 17);
             this.rdoHundredths.TabIndex = 2;
             this.rdoHundredths.TabStop = true;
             this.rdoHundredths.Text = "Hundredths";
@@ -399,6 +403,18 @@
             this.chkTwoRows.Text = "Display 2 Rows";
             this.chkTwoRows.UseVisualStyleBackColor = true;
             // 
+            // rdoMilliseconds
+            // 
+            this.rdoMilliseconds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoMilliseconds.AutoSize = true;
+            this.rdoMilliseconds.Location = new System.Drawing.Point(330, 3);
+            this.rdoMilliseconds.Name = "rdoMilliseconds";
+            this.rdoMilliseconds.Size = new System.Drawing.Size(105, 17);
+            this.rdoMilliseconds.TabIndex = 3;
+            this.rdoMilliseconds.TabStop = true;
+            this.rdoMilliseconds.Text = "Milliseconds";
+            this.rdoMilliseconds.UseVisualStyleBackColor = true;
+            // 
             // RunPredictionSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,7 +423,7 @@
             this.Name = "RunPredictionSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
             this.Size = new System.Drawing.Size(476, 341);
-            this.Load += new System.EventHandler(RunPredictionSettings_Load);
+            this.Load += new System.EventHandler(this.RunPredictionSettings_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -452,5 +468,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbComparison;
         private System.Windows.Forms.CheckBox chkTwoRows;
+        private System.Windows.Forms.RadioButton rdoMilliseconds;
     }
 }
