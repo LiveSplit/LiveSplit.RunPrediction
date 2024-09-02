@@ -90,7 +90,10 @@ public partial class RunPredictionSettings : UserControl
         cmbComparison.Items.Add("Current Comparison");
         cmbComparison.Items.AddRange(CurrentState.Run.Comparisons.Where(x => x != BestSplitTimesComparisonGenerator.ComparisonName && x != NoneComparisonGenerator.ComparisonName).ToArray());
         if (!cmbComparison.Items.Contains(Comparison))
+        {
             cmbComparison.Items.Add(Comparison);
+        }
+
         rdoSeconds.Checked = Accuracy == TimeAccuracy.Seconds;
         rdoTenths.Checked = Accuracy == TimeAccuracy.Tenths;
         rdoHundredths.Checked = Accuracy == TimeAccuracy.Hundredths;
@@ -134,13 +137,21 @@ public partial class RunPredictionSettings : UserControl
     private void UpdateAccuracy()
     {
         if (rdoSeconds.Checked)
+        {
             Accuracy = TimeAccuracy.Seconds;
+        }
         else if (rdoTenths.Checked)
+        {
             Accuracy = TimeAccuracy.Tenths;
+        }
         else if (rdoHundredths.Checked)
+        {
             Accuracy = TimeAccuracy.Hundredths;
+        }
         else
+        {
             Accuracy = TimeAccuracy.Milliseconds;
+        }
     }
 
     public void SetSettings(XmlNode node)

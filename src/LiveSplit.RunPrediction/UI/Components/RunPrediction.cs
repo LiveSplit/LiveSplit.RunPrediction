@@ -63,8 +63,8 @@ public class RunPrediction : IComponent
     private void DrawBackground(Graphics g, LiveSplitState state, float width, float height)
     {
         if (Settings.BackgroundColor.A > 0
-            || Settings.BackgroundGradient != GradientType.Plain
-            && Settings.BackgroundColor2.A > 0)
+            || (Settings.BackgroundGradient != GradientType.Plain
+            && Settings.BackgroundColor2.A > 0))
         {
             var gradientBrush = new LinearGradientBrush(
                         new PointF(0, 0),
@@ -192,7 +192,9 @@ public class RunPrediction : IComponent
     {
         var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
         if (!state.Run.Comparisons.Contains(comparison))
+        {
             comparison = state.CurrentComparison;
+        }
 
         InternalComponent.InformationName = InternalComponent.LongestString = GetDisplayedName(comparison);
 
@@ -211,7 +213,10 @@ public class RunPrediction : IComponent
             TimeSpan? delta = LiveSplitStateHelper.GetLastDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod) ?? TimeSpan.Zero;
             var liveDelta = state.CurrentTime[state.CurrentTimingMethod] - state.CurrentSplit.Comparisons[comparison][state.CurrentTimingMethod];
             if (liveDelta > delta)
+            {
                 delta = liveDelta;
+            }
+
             InternalComponent.TimeValue = delta + state.Run.Last().Comparisons[comparison][state.CurrentTimingMethod];
         }
         else if (state.CurrentPhase == TimerPhase.Ended)
