@@ -190,7 +190,7 @@ public class RunPrediction : IComponent
 
     public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
     {
-        var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
+        string comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
         if (!state.Run.Comparisons.Contains(comparison))
         {
             comparison = state.CurrentComparison;
@@ -211,7 +211,7 @@ public class RunPrediction : IComponent
         else if (state.CurrentPhase is TimerPhase.Running or TimerPhase.Paused)
         {
             TimeSpan? delta = LiveSplitStateHelper.GetLastDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod) ?? TimeSpan.Zero;
-            var liveDelta = state.CurrentTime[state.CurrentTimingMethod] - state.CurrentSplit.Comparisons[comparison][state.CurrentTimingMethod];
+            TimeSpan? liveDelta = state.CurrentTime[state.CurrentTimingMethod] - state.CurrentSplit.Comparisons[comparison][state.CurrentTimingMethod];
             if (liveDelta > delta)
             {
                 delta = liveDelta;
