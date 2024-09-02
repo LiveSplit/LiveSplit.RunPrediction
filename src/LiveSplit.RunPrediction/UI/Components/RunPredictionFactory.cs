@@ -15,7 +15,10 @@ public class RunPredictionFactory : IComponentFactory
 
     public ComponentCategory Category => ComponentCategory.Information;
 
-    public IComponent Create(LiveSplitState state) => new RunPrediction(state);
+    public IComponent Create(LiveSplitState state)
+    {
+        return new RunPrediction(state);
+    }
 
     public string UpdateName => ComponentName;
 

@@ -23,8 +23,8 @@ public partial class RunPredictionSettings : UserControl
     public GradientType BackgroundGradient { get; set; }
     public string GradientString
     {
-        get { return BackgroundGradient.ToString(); }
-        set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
+        get => BackgroundGradient.ToString();
+        set => BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value);
     }
 
     public string Comparison { get; set; }
