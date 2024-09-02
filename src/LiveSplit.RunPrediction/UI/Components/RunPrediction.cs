@@ -121,71 +121,53 @@ public class RunPrediction : IComponent
 
     protected string GetDisplayedName(string comparison)
     {
-        switch (comparison)
+        return comparison switch
         {
-            case "Current Comparison":
-                return "Current Pace";
-            case Run.PersonalBestComparisonName:
-                return "Current Pace";
-            case BestSegmentsComparisonGenerator.ComparisonName:
-                return "Best Possible Time";
-            case WorstSegmentsComparisonGenerator.ComparisonName:
-                return "Worst Possible Time";
-            case AverageSegmentsComparisonGenerator.ComparisonName:
-                return "Predicted Time";
-            default:
-                return "Current Pace (" + CompositeComparisons.GetShortComparisonName(comparison) + ")";
-        }
+            "Current Comparison" => "Current Pace",
+            Run.PersonalBestComparisonName => "Current Pace",
+            BestSegmentsComparisonGenerator.ComparisonName => "Best Possible Time",
+            WorstSegmentsComparisonGenerator.ComparisonName => "Worst Possible Time",
+            AverageSegmentsComparisonGenerator.ComparisonName => "Predicted Time",
+            _ => "Current Pace (" + CompositeComparisons.GetShortComparisonName(comparison) + ")",
+        };
     }
 
     protected void SetAlternateText(string comparison)
     {
-        switch (comparison)
+        InternalComponent.AlternateNameText = comparison switch
         {
-            case "Current Comparison":
-                InternalComponent.AlternateNameText = new[]
-                {
+            "Current Comparison" => new[]
+                            {
                     "Cur. Pace",
                     "Pace"
-                };
-                break;
-            case Run.PersonalBestComparisonName:
-                InternalComponent.AlternateNameText = new[]
-                {
+                },
+            Run.PersonalBestComparisonName =>
+                [
                     "Cur. Pace",
                     "Pace"
-                };
-                break;
-            case BestSegmentsComparisonGenerator.ComparisonName:
-                InternalComponent.AlternateNameText = new[]
-                {
+                ],
+            BestSegmentsComparisonGenerator.ComparisonName =>
+                [
                     "Best Poss. Time",
                     "Best Time",
                     "BPT"
-                };
-                break;
-            case WorstSegmentsComparisonGenerator.ComparisonName:
-                InternalComponent.AlternateNameText = new[]
-                {
+                ],
+            WorstSegmentsComparisonGenerator.ComparisonName =>
+                [
                     "Worst Poss. Time",
                     "Worst Time"
-                };
-                break;
-            case AverageSegmentsComparisonGenerator.ComparisonName:
-                InternalComponent.AlternateNameText = new[]
-                {
+                ],
+            AverageSegmentsComparisonGenerator.ComparisonName =>
+                [
                     "Pred. Time",
-                };
-                break;
-            default:
-                InternalComponent.AlternateNameText = new[]
-                {
+                ],
+            _ =>
+                [
                     "Current Pace",
                     "Cur. Pace",
                     "Pace"
-                };
-                break;
-        }
+                ],
+        };
     }
 
     public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
