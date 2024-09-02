@@ -208,7 +208,7 @@ public class RunPrediction : IComponent
         {
             InternalComponent.TimeValue = null;
         }
-        else if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
+        else if (state.CurrentPhase is TimerPhase.Running or TimerPhase.Paused)
         {
             TimeSpan? delta = LiveSplitStateHelper.GetLastDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod) ?? TimeSpan.Zero;
             var liveDelta = state.CurrentTime[state.CurrentTimingMethod] - state.CurrentSplit.Comparisons[comparison][state.CurrentTimingMethod];
