@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
+using LiveSplit.Localization;
 using LiveSplit.Model;
 using LiveSplit.Model.Comparisons;
 using LiveSplit.TimeFormatters;
@@ -13,6 +14,8 @@ namespace LiveSplit.UI.Components;
 
 public class RunPrediction : IComponent
 {
+    private static string T(string source) => UiLocalizer.Translate(source, LanguageResolver.ResolveCurrentCultureLanguage());
+
     protected InfoTimeComponent InternalComponent { get; set; }
     public RunPredictionSettings Settings { get; set; }
     private SplitTimeFormatter Formatter { get; set; }
@@ -123,12 +126,12 @@ public class RunPrediction : IComponent
     {
         return comparison switch
         {
-            "Current Comparison" => "Current Pace",
-            Run.PersonalBestComparisonName => "Current Pace",
-            BestSegmentsComparisonGenerator.ComparisonName => "Best Possible Time",
-            WorstSegmentsComparisonGenerator.ComparisonName => "Worst Possible Time",
-            AverageSegmentsComparisonGenerator.ComparisonName => "Predicted Time",
-            _ => "Current Pace (" + CompositeComparisons.GetShortComparisonName(comparison) + ")",
+            "Current Comparison" => T("Current Pace"),
+            Run.PersonalBestComparisonName => T("Current Pace"),
+            BestSegmentsComparisonGenerator.ComparisonName => T("Best Possible Time"),
+            WorstSegmentsComparisonGenerator.ComparisonName => T("Worst Possible Time"),
+            AverageSegmentsComparisonGenerator.ComparisonName => T("Predicted Time"),
+            _ => T("Current Pace") + " (" + CompositeComparisons.GetShortComparisonName(comparison) + ")",
         };
     }
 
@@ -138,34 +141,34 @@ public class RunPrediction : IComponent
         {
             "Current Comparison" => new[]
                             {
-                    "Cur. Pace",
-                    "Pace"
+                    T("Cur. Pace"),
+                    T("Pace")
                 },
             Run.PersonalBestComparisonName =>
                 [
-                    "Cur. Pace",
-                    "Pace"
+                    T("Cur. Pace"),
+                    T("Pace")
                 ],
             BestSegmentsComparisonGenerator.ComparisonName =>
                 [
-                    "Best Poss. Time",
-                    "Best Time",
+                    T("Best Poss. Time"),
+                    T("Best Time"),
                     "BPT"
                 ],
             WorstSegmentsComparisonGenerator.ComparisonName =>
                 [
-                    "Worst Poss. Time",
-                    "Worst Time"
+                    T("Worst Poss. Time"),
+                    T("Worst Time")
                 ],
             AverageSegmentsComparisonGenerator.ComparisonName =>
                 [
-                    "Pred. Time",
+                    T("Pred. Time"),
                 ],
             _ =>
                 [
-                    "Current Pace",
-                    "Cur. Pace",
-                    "Pace"
+                    T("Current Pace"),
+                    T("Cur. Pace"),
+                    T("Pace")
                 ],
         };
     }
@@ -186,7 +189,7 @@ public class RunPrediction : IComponent
             PreviousInformationName = InternalComponent.InformationName;
         }
 
-        if (InternalComponent.InformationName.StartsWith("Current Pace") && state.CurrentPhase == TimerPhase.NotRunning)
+        if (InternalComponent.InformationName.StartsWith(T("Current Pace")) && state.CurrentPhase == TimerPhase.NotRunning)
         {
             InternalComponent.TimeValue = null;
         }
