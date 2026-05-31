@@ -1,12 +1,11 @@
-﻿using System;
+﻿using LiveSplit.Model;
+using LiveSplit.Model.Comparisons;
+using LiveSplit.TimeFormatters;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
-
-using LiveSplit.Model;
-using LiveSplit.Model.Comparisons;
-using LiveSplit.TimeFormatters;
 
 namespace LiveSplit.UI.Components;
 
@@ -136,22 +135,11 @@ public partial class RunPredictionSettings : UserControl
 
     private void UpdateAccuracy()
     {
-        if (rdoSeconds.Checked)
-        {
-            Accuracy = TimeAccuracy.Seconds;
-        }
-        else if (rdoTenths.Checked)
-        {
-            Accuracy = TimeAccuracy.Tenths;
-        }
-        else if (rdoHundredths.Checked)
-        {
-            Accuracy = TimeAccuracy.Hundredths;
-        }
-        else
-        {
-            Accuracy = TimeAccuracy.Milliseconds;
-        }
+        Accuracy =
+            rdoSeconds.Checked ? TimeAccuracy.Seconds
+            : rdoTenths.Checked ? TimeAccuracy.Tenths
+            : rdoHundredths.Checked ? TimeAccuracy.Hundredths
+            : TimeAccuracy.Milliseconds;
     }
 
     public void SetSettings(XmlNode node)
